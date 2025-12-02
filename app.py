@@ -604,50 +604,19 @@ with main_tab:
             calculations_in_simple,
         )
 
-        lower_question = question_clean.lower()
-        if "hospital" in lower_question:
-            clear_decision = "Construir un hospital aquí"
-        elif "escuela" in lower_question or "colegio" in lower_question:
-            clear_decision = "Ubicar una escuela en este sitio"
-        elif "parque" in lower_question or "área verde" in lower_question:
-            clear_decision = "Crear un área verde en este punto"
-        else:
-            clear_decision = PROMPT_FORMATTING_CONFIG["decision_default_text"]
+        # Build user context (always the same structure)
+        prompt_text = f"""**Objetivo del agente:**
+{objective_clean if objective_clean else PROMPT_FORMATTING_CONFIG["objective_no_data_text"]}
 
-        tech_level = st.session_state.get("technical_level", 1)
-        default_prompt = get_system_prompt_by_level(tech_level)
-        active_system_prompt = st.session_state.get(
-            "system_prompt_override", default_prompt
-        )
+**Reglas que debe seguir:**
+{rules_in_simple}
 
-        format_params = {
-            "objective": (
-                objective_clean
-                if objective_clean
-                else PROMPT_FORMATTING_CONFIG["objective_no_data_text"]
-            ),
-            "rules_in_simple": rules_in_simple,
-            "calculations_in_simple": calculations_in_simple,
-            "clear_decision": clear_decision,
-        }
+**Cálculos que realizó:**
+{calculations_in_simple}
 
-        try:
-            prompt_text = active_system_prompt.format(**format_params)
-        except KeyError as e:
-            logger.warning(f"Missing format parameter: {e}. Using fallback prompt.")
-            prompt_text = active_system_prompt
-
-        prompt_text = re.sub(
-            rf"(?<!\n)\s*{re.escape(calculations_phrase)}",
-            f"\n\n{calculations_phrase}",
-            prompt_text,
-        )
-        decision_phrase = PROMPT_FORMATTING_CONFIG["decision_phrase"]
-        prompt_text = re.sub(
-            rf"(?<!\n)\s*{re.escape(decision_phrase)}",
-            f"\n\n{decision_phrase}",
-            prompt_text,
-        )
+**Pregunta del usuario:**
+{question_clean}"""
+        
         return prompt_text
 
 
@@ -716,18 +685,38 @@ with main_tab:
             is_custom = "system_prompt_override" in st.session_state
             logger.info(f"[LLM] Using {'custom' if is_custom else 'default'} system prompt")
 
+            # Get the appropriate system prompt
+            tech_level = st.session_state.get("technical_level", 1)
+            default_system_prompt = get_system_prompt_by_level(tech_level)
+            active_system_prompt = st.session_state.get(
+                "system_prompt_override", default_system_prompt
+            )
+
+            system_message_content = (
+                f"{active_system_prompt}\n\n"
+                "CRÍTICO: Responde ÚNICAMENTE con información del contexto proporcionado. "
+                "NO inventes datos, números, métricas o decisiones. "
+                "Si el contexto dice 'no sé', debes responder que falta esa información. "
+                "Los ejemplos en el prompt son SOLO para formato, NO uses sus datos. "
+                "Responde en el formato exacto indicado. "
+                "No incluyas prefacios ni metatexto como 'Entendido', 'Estoy listo', 'A continuación', etc."
+            )
+            
+            logger.info("=" * 80)
+            logger.info("[PROMPT] COMPLETE SYSTEM MESSAGE:")
+            for line in system_message_content.split('\n'):
+                logger.info(line)
+            logger.info("=" * 80)
+            logger.info("[PROMPT] COMPLETE USER CONTEXT:")
+            for line in prompt.split('\n'):
+                logger.info(line)
+            logger.info("=" * 80)
+            logger.info(f"[PROMPT] USER QUESTION: {question_effective}")
+            logger.info("=" * 80)
+
             result = llm.invoke(
                 [
-                    SystemMessage(
-                        content=(
-                            "CRÍTICO: Responde ÚNICAMENTE con información del contexto proporcionado. "
-                            "NO inventes datos, números, métricas o decisiones. "
-                            "Si el contexto dice 'no sé', debes responder que falta esa información. "
-                            "Los ejemplos en el prompt son SOLO para formato, NO uses sus datos. "
-                            "Responde en el formato exacto indicado. "
-                            "No incluyas prefacios ni metatexto como 'Entendido', 'Estoy listo', 'A continuación', etc."
-                        )
-                    ),
+                    SystemMessage(content=system_message_content),
                     HumanMessage(content=prompt),
                 ],
                 config={"configurable": {"model_kwargs": {}}},
