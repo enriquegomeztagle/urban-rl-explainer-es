@@ -372,7 +372,8 @@ with main_tab:
         if st.button("Restaurar prompt por defecto"):
             if "system_prompt_override" in st.session_state:
                 del st.session_state["system_prompt_override"]
-            st.session_state["custom_system_prompt"] = default_prompt
+            if "custom_system_prompt" in st.session_state:
+                del st.session_state["custom_system_prompt"]
             st.success("✓ Prompt restaurado al valor por defecto")
             st.rerun()
 
