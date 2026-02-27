@@ -1,306 +1,339 @@
-# 🏙️ Explicador de Decisiones del Agente Urbano RL
+# 🏙️ Marco de Inteligencia Artificial Explicable para Decisiones de un Agente RL Urbano
 
-Sistema interactivo para explicar decisiones de agentes de Reinforcement Learning aplicados a planeación urbana, con adaptación automática del vocabulario técnico según la audiencia.
+------------------------------------------------------------------------
 
-## 📋 Descripción
+## 📋 Descripción General del Sistema
 
-Este portal web permite explicar las decisiones de un agente de RL urbano en **tres niveles técnicos diferentes**:
+Esta plataforma web facilita la interpretación de las decisiones de un
+agente de Reinforcement Learning (RL) aplicado a planificación urbana a
+través de **tres niveles técnicos diferenciados**:
 
-- **Nivel 1 - Lenguaje Común**: Para público general sin conocimientos técnicos
-- **Nivel 2 - Profesional**: Para arquitectos y urbanistas con terminología especializada
-- **Nivel 3 - Técnico RL**: Para científicos de datos e investigadores en RL/ML
+-   **Nivel 1 --- Público General**: Diseñado para audiencias sin
+    formación técnica, utilizando lenguaje claro y accesible.
+-   **Nivel 2 --- Profesional**: Orientado a arquitectos y urbanistas,
+    empleando terminología especializada en diseño urbano.
+-   **Nivel 3 --- Técnico RL**: Dirigido a científicos de datos e
+    investigadores en ML/RL, utilizando nomenclatura algorítmica y
+    computacional avanzada.
 
-## ✨ Características Principales
+------------------------------------------------------------------------
 
-### Sistema de Niveles Técnicos
-- Adaptación automática del vocabulario según la audiencia
-- Tres niveles de complejidad con prompts especializados
-- Modo comparación para ver las tres respuestas simultáneamente
+## ✨ Capacidades Principales
 
-### 💾 Sistema de Caché Inteligente
+### 🎚️ Estratificación Técnica Dinámica
 
-- Cache MD5-based para evitar consultas duplicadas
-- Respuestas instantáneas para queries repetidas
-- Reducción de costos y tiempo de respuesta
+-   Modulación automática del vocabulario según el público objetivo.
+-   Tres niveles de complejidad gobernados por ingeniería de prompts
+    especializada.
+-   Modo comparativo que permite visualizar simultáneamente las tres
+    respuestas.
 
-### 📊 Métricas y Análisis
+### 💾 Mecanismo Inteligente de Caché
 
-- Tiempo de generación por respuesta
-- Conteo de tokens (entrada/salida)
-- Indicador de uso de caché
-- Historial completo de conversaciones
+-   Sistema de caché basado en hash MD5 para evitar consultas
+    redundantes a la API.
+-   Recuperación instantánea de respuestas previamente procesadas.
+-   Optimización significativa de latencia y costos operativos.
 
-### 🔧 Configuración Flexible
+### 📊 Analítica y Telemetría
 
-- Variables de entorno configurables desde la interfaz
-- Personalización avanzada del system prompt
-- Presets predefinidos (sencillo y técnico)
-- Alertas automáticas de configuración faltante
+-   Medición de latencia por consulta.
+-   Métricas de utilización de tokens (entrada/salida).
+-   Indicadores de uso de caché.
+-   Registro completo de conversaciones y trazabilidad.
 
-### 📜 Historial y Trazabilidad
+### 🔧 Protocolo de Configuración Flexible
 
-- Registro completo de todas las consultas
-- Timestamps y métricas por conversación
-- Capacidad de limpiar historial y caché
+-   Configuración de variables de entorno desde la interfaz (UI).
+-   Personalización avanzada de prompts del sistema.
+-   Presets operativos predefinidos (simplificados y técnicos).
+-   Alertas automáticas ante configuraciones incompletas.
 
-## 🚀 Instalación y Uso
+### 📜 Trazabilidad y Auditoría
 
-### Requisitos Previos
+-   Registro exhaustivo de interacciones.
+-   Marcas temporales y métricas por sesión.
+-   Capacidad administrativa para limpiar historial y caché.
 
-- Python 3.11 o superior
-- Acceso a una API compatible con OpenAI (OpenAI, Azure, etc.)
+------------------------------------------------------------------------
 
-### Instalación Local
+# 🚀 Despliegue y Flujo Operativo
 
-1. **Clonar el repositorio**
+## 🔹 Requisitos Previos
 
-```bash
+-   Python 3.11 o superior.
+-   Acceso a una API compatible con OpenAI (OpenAI, Azure, etc.).
+
+------------------------------------------------------------------------
+
+## 💻 Configuración en Entorno Local
+
+### 1️⃣ Clonar el repositorio
+
+``` bash
 git clone https://github.com/enriquegomeztagle/urban-rl-explainer-es
 ```
 
-2. **Crear entorno virtual**
+### 2️⃣ Crear entorno virtual
 
-```bash
+``` bash
 python -m venv venv
 source venv/bin/activate  # En Windows: venv\Scripts\activate
 ```
 
-3. **Instalar dependencias**
+### 3️⃣ Instalar dependencias
 
-```bash
+``` bash
 pip install -r requirements.txt
 ```
 
-4. **Configurar variables de entorno**
+### 4️⃣ Configurar variables de entorno
 
-Crear archivo `.env` en la raíz del proyecto:
+Crear un archivo `.env` en la raíz del proyecto:
 
-```env
+``` env
 OPENAI_API_KEY=tu_api_key_aqui
 OPENAI_BASE_URL=https://api.openai.com
 OPENAI_MODEL=gpt-4
 ```
 
-5. **Ejecutar la aplicación**
+### 5️⃣ Ejecutar la aplicación
 
-```bash
+``` bash
 streamlit run app.py
 ```
 
-La aplicación estará disponible en `http://localhost:8501`
+La aplicación estará disponible en:
 
-### 🐳 Instalación con Docker
+http://localhost:8501
 
-1. **Construir la imagen**
+------------------------------------------------------------------------
 
-```bash
-docker build -t rl-urbanism-explainer .
+## 🐳 Contenerización con Docker
+
+### Construir la imagen
+
+``` bash
+docker build -t rl-urbanismo-explainer .
 ```
 
-2. **Ejecutar el contenedor**
+### Ejecutar el contenedor
 
-```bash
-docker run -p 8501:8501 \
-  -e OPENAI_API_KEY=tu_api_key_aqui \
-  -e OPENAI_BASE_URL=https://api.openai.com \
-  -e OPENAI_MODEL=gpt-4 \
-  rl-urbanism-explainer
+``` bash
+docker run -p 8501:8501   -e OPENAI_API_KEY=tu_api_key_aqui   -e OPENAI_BASE_URL=https://api.openai.com   -e OPENAI_MODEL=gpt-4   rl-urbanismo-explainer
 ```
 
-O usando un archivo `.env`:
+### Alternativamente usando `.env`
 
-```bash
-docker run -p 8501:8501 --env-file .env rl-urbanism-explainer
+``` bash
+docker run -p 8501:8501 --env-file .env rl-urbanismo-explainer
 ```
 
-3. **Acceder a la aplicación**
+Acceder desde el navegador:
 
-Abrir navegador en `http://localhost:8501`
+http://localhost:8501
 
-### 1. Configuración Inicial
+------------------------------------------------------------------------
 
-- Verificar que las variables de entorno estén configuradas (sidebar izquierdo)
-- Seleccionar el nivel técnico deseado con el slider
+# 🧭 Protocolo de Uso
 
-### 2. Cargar Datos
+## 🔹 Configuración Inicial
 
-- Usar el botón "Cargar ejemplo" para presets predefinidos
-- O ingresar manualmente:
-  - **Objetivo del agente**: Qué busca optimizar
-  - **Reglas**: Restricciones y políticas
-  - **Cálculos**: Métricas y evaluaciones realizadas
-  - **Pregunta**: La consulta específica sobre la decisión
+Verificar las variables de entorno en la barra lateral y seleccionar el
+nivel técnico mediante el deslizador.
 
-### 3. Generar Respuesta
+## 🔹 Ingreso de Datos
 
-- **Modo Individual**: Genera respuesta en el nivel técnico seleccionado
-- **Modo Comparación**: Genera las 3 respuestas simultáneamente
+Utilizar "Cargar Ejemplo" o ingresar manualmente:
 
-### 4. Revisar Resultados
+-   **Objetivo del Agente**: Meta de optimización.
+-   **Restricciones de Política**: Reglas operativas.
+-   **Métricas Computacionales**: Cálculos realizados por el agente.
+-   **Consulta**: Pregunta específica sobre la decisión.
 
-- Ver métricas de generación (tiempo, tokens, caché)
-- Revisar la explicación adaptada al nivel seleccionado
-- Consultar historial de conversaciones previas
+## 🔹 Generación de Respuesta
 
-## 🏗️ Arquitectura Técnica
+-   **Modo Individual**: Genera una respuesta en el nivel seleccionado.
+-   **Modo Comparativo**: Genera simultáneamente las tres versiones
+    técnicas.
 
-### Componentes Principales
+## 🔹 Análisis de Resultados
 
-```
+Revisar latencia, tokens, estado de caché y consultar historial.
+
+------------------------------------------------------------------------
+
+# 🏗️ Arquitectura del Sistema
+
+## Componentes Principales
+
+``` text
 app.py
-├── Configuración
-│   ├── Variables de entorno (OPENAI_API_KEY, BASE_URL, MODEL)
-│   ├── Session State (historial, caché, métricas)
-│   └── Presets (ejemplos técnicos y sencillos)
+├── Módulo de Configuración
+│   ├── Variables de Entorno
+│   ├── Gestión de Estado de Sesión
+│   └── Presets
 │
-├── Sistema de Prompts
-│   ├── BASE_CRITICAL_RULES (reglas compartidas)
-│   ├── SYSTEM_PROMPT_LEVEL_CONFIG (configuraciones por nivel)
-│   └── build_system_prompt() (composición dinámica)
+├── Framework de Ingeniería de Prompts
+│   ├── BASE_CRITICAL_RULES
+│   ├── SYSTEM_PROMPT_LEVEL_CONFIG
+│   └── build_system_prompt()
 │
-├── Generación de Respuestas
-│   ├── generate_response_from_inputs() (con caché MD5)
-│   ├── LangChain + ChatOpenAI
-│   └── Manejo de errores y métricas
+├── Pipeline de Generación
+│   ├── generate_response_from_inputs()
+│   ├── Integración LangChain + ChatOpenAI
+│   └── Manejo de excepciones y métricas
 │
 └── Interfaz Streamlit
-    ├── Sidebar (configuración de env vars)
+    ├── Sidebar
     ├── Selector de nivel técnico
     ├── Formulario de entrada
-    ├── Tabs (individual vs comparación)
-    └── Expanders (historial y caché)
+    ├── Tabs
+    └── Expanders
 ```
 
-### Sistema de Caché
+------------------------------------------------------------------------
 
-- **Clave**: MD5(objetivo + reglas + calculos + pregunta + nivel_tecnico)
-- **Almacenamiento**: st.session_state (en memoria)
-- **Beneficios**: Respuestas instantáneas, reducción de costos
+## 🔐 Arquitectura de Caché
 
-### Arquitectura de Prompts
+-   **Clave Criptográfica**:
+    `MD5(objetivo + restricciones + métricas + consulta + nivel_tecnico)`
+-   **Almacenamiento**: `st.session_state`
+-   **Beneficio**: Respuestas casi instantáneas y reducción de costos.
 
-1. **Base compartida**: Reglas críticas comunes a todos los niveles
-2. **Configuración por nivel**: Rol, tarea, reglas extra, formato, ejemplos
-3. **Composición dinámica**: `build_system_prompt(level)` ensambla el prompt final
+------------------------------------------------------------------------
 
-## 🔍 Características Avanzadas
+## 🧠 Arquitectura de Síntesis de Prompts
 
-### Anti-Hallucination System
+-   Base compartida con reglas críticas.
+-   Configuración específica por nivel.
+-   Ensamblaje dinámico mediante `build_system_prompt(level)`.
 
-El sistema incluye múltiples salvaguardas para prevenir que el LLM invente información:
+------------------------------------------------------------------------
 
-- Reglas críticas explícitas en el prompt
-- Validación de contexto proporcionado
-- Instrucciones para responder "no sé" cuando falta información
-- Separación clara entre ejemplos de formato y datos reales
+# 🔍 Mecanismos Avanzados
 
-### Progress Tracking
+## Mitigación de Alucinaciones
 
-- Barras de progreso multi-etapa
-- Estados de procesamiento en tiempo real
-- Feedback visual de caché vs nueva generación
+-   Reglas críticas explícitas en el prompt base.
+-   Validación rigurosa del contexto.
+-   Instrucciones para responder "desconocido" si falta información.
+-   Separación clara entre ejemplos de formato y datos reales.
 
-### Error Handling
+## Telemetría
 
-- Manejo de errores de conexión
-- Timeout handling
-- Mensajes de error descriptivos con soluciones sugeridas
+-   Indicadores de progreso.
+-   Seguimiento en tiempo real.
+-   Diferenciación visual entre caché y generación nueva.
 
-## 📊 Métricas Disponibles
+## Manejo de Excepciones
 
-- **Tiempo de generación**: Duración total de la consulta
-- **Nivel técnico**: Nivel usado para la respuesta
-- **Estado de caché**: Si la respuesta proviene de caché
-- **Tokens**: Conteo de tokens de entrada/salida (cuando disponible)
-- **Timestamp**: Marca de tiempo de cada conversación
+-   Gestión robusta de errores de conexión.
+-   Manejo de timeouts.
+-   Mensajes descriptivos con soluciones sugeridas.
 
-## 🛠️ Tecnologías Utilizadas
+------------------------------------------------------------------------
 
-- **Streamlit**: Framework web interactivo
-- **LangChain**: Integración con LLMs
-- **OpenAI API**: Generación de lenguaje natural
-- **Loguru**: Sistema de logging
-- **Python-dotenv**: Gestión de variables de entorno
+# 📊 Métricas Disponibles
 
-## 📝 Dependencias
+-   **Latencia de generación**
+-   **Nivel técnico utilizado**
+-   **Estado de caché**
+-   **Uso de tokens**
+-   **Timestamp**
 
-Ver `requirements.txt` para la lista completa de dependencias .
+------------------------------------------------------------------------
+
+# 🛠️ Stack Tecnológico
+
+-   Streamlit
+-   LangChain
+-   OpenAI API
+-   Loguru
+-   Python-dotenv
+
+------------------------------------------------------------------------
+
+# 📦 Dependencias
+
+Consultar `requirements.txt`.
 
 Principales:
 
-- `streamlit`
-- `langchain-openai`
-- `loguru`
+-   streamlit
+-   langchain-openai
+-   loguru
 
-## 🔐 Seguridad
+------------------------------------------------------------------------
 
-- Las API keys se almacenan en variables de entorno
-- Input type="password" para campos sensibles en la UI
-- No se almacenan credenciales en código fuente
-- Recomendado usar `.env` file
+# 🔒 Seguridad
 
-## 🐛 Troubleshooting
+-   API keys mediante variables de entorno.
+-   Campos sensibles con `type="password"`.
+-   Sin credenciales hardcodeadas.
+-   Uso recomendado de `.env`.
 
-### Error: Variables de entorno faltantes
+------------------------------------------------------------------------
 
-**Solución**: Verificar que `.env` contenga todas las variables requeridas o configurarlas desde el sidebar.
+# 🐛 Resolución de Problemas
 
-### Error: Connection timeout
+### Variables faltantes
 
-**Solución**: Verificar conectividad a internet y validez de OPENAI_BASE_URL.
+Verificar `.env` o configurar desde la barra lateral.
 
-### Error: Invalid API key
+### Timeout de conexión
 
-**Solución**: Revisar que OPENAI_API_KEY sea válida y tenga permisos necesarios.
+Revisar conexión y `OPENAI_BASE_URL`.
 
-### Respuestas inconsistentes
+### API Key inválida
 
-**Solución**: Limpiar caché desde el expander "💾 Estadísticas de Caché".
+Verificar permisos y validez.
 
-## 🚧 Limitaciones Conocidas
+### Inconsistencias en respuesta
 
-- El caché es volátil (se pierde al cerrar la sesión)
-- Máximo de tokens por respuesta: 1024 (configurable en código)
-- Requiere conexión a internet para consultas al LLM
+Limpiar caché desde el módulo correspondiente.
 
-## 📄 Licencia
+------------------------------------------------------------------------
 
-Este proyecto fue desarrollado para propósitos de investigación en planificación urbana utilizando agentes de Aprendizaje por Refuerzo y está destinado únicamente para evaluación académica.
+# 🚧 Limitaciones
 
-### Aviso de Copyright
+-   Caché volátil.
+-   Máximo 1024 tokens (configurable).
+-   Requiere conexión a internet.
 
-© 2025 Enrique Ulises Baez Gomez Tagle. Todos los derechos reservados.
+------------------------------------------------------------------------
 
-### Términos de Uso
+# 📄 Licencia y Uso
 
-**Solo Investigación y Evaluación**: Este código base está creado específicamente para investigación académica en planificación urbana utilizando técnicas de Aprendizaje por Refuerzo.
+Proyecto desarrollado exclusivamente para investigación académica en
+planificación urbana con RL.
 
-**Sin Uso Comercial**: Este proyecto no puede ser utilizado para propósitos comerciales sin el permiso escrito explícito del autor.
+## Aviso de Copyright
 
-**Sin Redistribución**: El código no puede ser redistribuido, copiado o modificado sin autorización del autor.
+Todos los derechos reservados.
 
-**Atribución Requerida**: Cualquier referencia a este trabajo debe incluir la atribución adecuada al autor.
+## Términos de Uso
 
-### Propiedad Intelectual
+-   Uso exclusivo para investigación y evaluación.
+-   Prohibido uso comercial sin autorización.
+-   Prohibida redistribución sin consentimiento.
+-   Atribución obligatoria.
 
-Este proyecto representa trabajo original desarrollado independientemente para investigación en planificación urbana y Aprendizaje por Refuerzo. La arquitectura, implementación y decisiones de diseño son propiedad intelectual del autor.
+## Propiedad Intelectual
 
-### Contacto
+Trabajo original enfocado en planificación urbana y Explainable AI en
+RL.
 
-Para preguntas sobre este proyecto o licencias, por favor contactar:
+------------------------------------------------------------------------
 
-- **Autor**: Enrique Ulises Baez Gomez Tagle
-- **GitHub**: [@enriquegomeztagle](https://github.com/enriquegomeztagle)
-- **Propósito**: Proyecto de Investigación RL en Planificación Urbana
+# 📫 Contacto
 
----
+Dominio: Investigación en RL aplicado a Planificación Urbana
 
-## 👨‍💻 Autor
+## Autores
 
-**Enrique Ulises Baez Gomez Tagle**
+-   Enrique Ulises Baez Gomez Tagle
+-   Daniel Adrián Contreras Olivas
+-   Francisco Javier Tallabs Utrilla
 
-GitHub: [@enriquegomeztagle](https://github.com/enriquegomeztagle)
-
----
-
-**Hecho con ❤️ para investigación en planificación urbana y explicabilidad de IA**
+GitHub: @enriquegomeztagle
